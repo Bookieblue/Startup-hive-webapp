@@ -12,6 +12,13 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { Input } from '../ui/input';
 import Button from '../ui/button';
+import { useRouter } from 'next/navigation';
+import { useMutateSetNewPassword } from '@/lib/models/auth/hooks';
+import { toast } from '../ui/use-toast';
+import { getLocalStorage, saveLocalStorage } from '@/lib/core/localStorageUtil';
+import { errorFormat } from '@/lib/utils';
+import { HIVE_ACCOUNT_EMAIL } from '@/lib/core/constant';
+import _ from 'lodash';
 
 const FormSchema = z
   .object({
@@ -30,6 +37,8 @@ const FormSchema = z
   });
 
 const SetPasswordForm = () => {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = React.useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -38,8 +47,36 @@ const SetPasswordForm = () => {
     },
   });
 
+  const { mutate: mutateSetNewPassword } = useMutateSetNewPassword();
+
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
-    console.log('submitted successfully');
+    const cacheToken = getLocalStorage(HIVE_ACCOUNT_EMAIL) ;
+    var b = {token: cacheToken} //new object to be added as payload
+    const payload = _.extend(values, b); 
+  
+    setIsLoading(true);
+    mutateSetNewPassword(values, {
+      onSuccess: (resp) => {
+        // console.log(resp);
+        setIsLoading(false);
+        toast({
+          title: 'Success',
+          description: 'Your New Password Created Successfully',
+        });
+        form.reset();
+        router.push('/login');
+      },
+      onError: (error: any) => {
+        console.log(error);
+        setIsLoading(false);
+        const message = errorFormat(error);
+        toast({
+          title: 'Error',
+          description: message,
+        });
+      },
+    });
+    // console.log('submitted successfully');
   };
   return (
     <Form {...form}>
@@ -78,7 +115,7 @@ const SetPasswordForm = () => {
           )}
         />
         <div className="mt-3 md:mt-5 ">
-          <Button type="submit" title="Submit Now" variant="btn_lightred" />
+          <Button type="submit" title="Submit Now" variant="btn_lightred" isLoading={isLoading} />
         </div>
       </form>
     </Form>
