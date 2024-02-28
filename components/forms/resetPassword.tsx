@@ -26,7 +26,6 @@ const FormSchema = z.object({
     .email('Incorrect email address'),
 });
 
-
 const ResetPasswordForm = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -35,7 +34,6 @@ const ResetPasswordForm = () => {
     },
   });
 
- 
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
   const { mutate: onPassReset } = useMutatePasswordReset();
@@ -64,7 +62,6 @@ const ResetPasswordForm = () => {
         });
       },
     });
-
   };
   return (
     <Form {...form}>
@@ -82,7 +79,12 @@ const ResetPasswordForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" title="Submit Now" variant="btn_lightred" isLoading={isLoading} />
+        <Button
+          type="submit"
+          title="Submit Now"
+          variant="btn_lightred"
+          isLoading={isLoading}
+        />
       </form>
     </Form>
   );

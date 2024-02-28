@@ -15,9 +15,12 @@ import Button from '../ui/button';
 import { useRouter } from 'next/navigation';
 import { useMutateSetNewPassword } from '@/lib/models/auth/hooks';
 import { toast } from '../ui/use-toast';
-import { getLocalStorage, saveLocalStorage } from '@/lib/core/localStorageUtil';
+import {
+  getLocalStorage,
+  removeLocalStorage,
+} from '@/lib/core/localStorageUtil';
 import { errorFormat } from '@/lib/utils';
-import { HIVE_ACCOUNT_EMAIL } from '@/lib/core/constant';
+import { HIVE_RESET_TOKEN } from '@/lib/core/constant';
 import _ from 'lodash';
 
 const FormSchema = z
@@ -50,10 +53,10 @@ const SetPasswordForm = () => {
   const { mutate: mutateSetNewPassword } = useMutateSetNewPassword();
 
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
-    const cacheToken = getLocalStorage(HIVE_ACCOUNT_EMAIL) ;
-    var b = {token: cacheToken} //new object to be added as payload
-    const payload = _.extend(values, b); 
-  
+    const cacheToken = getLocalStorage(HIVE_RESET_TOKEN);
+    var b = { token: cacheToken }; //new object to be added as payload
+    const payload = _.extend(values, b);
+
     setIsLoading(true);
     mutateSetNewPassword(values, {
       onSuccess: (resp) => {
@@ -64,10 +67,10 @@ const SetPasswordForm = () => {
           description: 'Your New Password Created Successfully',
         });
         form.reset();
+        removeLocalStorage(HIVE_RESET_TOKEN);
         router.push('/login');
       },
       onError: (error: any) => {
-        console.log(error);
         setIsLoading(false);
         const message = errorFormat(error);
         toast({
@@ -76,7 +79,6 @@ const SetPasswordForm = () => {
         });
       },
     });
-    // console.log('submitted successfully');
   };
   return (
     <Form {...form}>
@@ -115,7 +117,12 @@ const SetPasswordForm = () => {
           )}
         />
         <div className="mt-3 md:mt-5 ">
-          <Button type="submit" title="Submit Now" variant="btn_lightred" isLoading={isLoading} />
+          <Button
+            type="submit"
+            title="Submit Now"
+            variant="btn_lightred"
+            isLoading={isLoading}
+          />
         </div>
       </form>
     </Form>

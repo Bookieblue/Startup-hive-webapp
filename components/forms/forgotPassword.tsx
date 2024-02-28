@@ -7,40 +7,60 @@ import {
   FormLabel,
   FormMessage,
 } from '../ui/form';
+import { toast } from '@/components/ui/use-toast';
+import { HIVE_ACCOUNT_EMAIL } from '@/lib/core/constant';
+import { saveLocalStorage } from '@/lib/core/localStorageUtil';
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { Input } from '../ui/input';
 import Button from '../ui/button';
-import Link from 'next/link';
-import { toast } from '@/components/ui/use-toast';
+import { errorFormat } from '@/lib/utils';
+import { useMutatePasswordReset } from '@/lib/models/auth/hooks';
 
 const FormSchema = z.object({
   email: z
     .string()
     .min(1, 'Email is required')
     .email('Incorrect email address'),
-  password: z
-    .string()
-    .min(1, 'Password is required')
-    .min(8, 'Password must have 8 characters'),
 });
 
-const LoginForm = () => {
+const ForgotPasswordForm = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       email: '',
-      password: '',
     },
   });
+
+  const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
+  const { mutate: onPassReset } = useMutatePasswordReset();
 
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
+    const payload = values;
     setIsLoading(true);
-    toast({
-      title: 'Submitted succesfully',
-      description: 'User login successfully',
+
+    onPassReset(payload, {
+      onSuccess: () => {
+        setIsLoading(false);
+        toast({
+          title: 'OTP Reset Sent Successfully',
+          description: 'OTP Sent successfully',
+        });
+        saveLocalStorage(HIVE_ACCOUNT_EMAIL, payload.email);
+        form.reset();
+        router.push('/password/confirm');
+      },
+      onError: (error: any) => {
+        setIsLoading(false);
+        const message = errorFormat(error);
+        toast({
+          title: 'Error',
+          description: message,
+        });
+      },
     });
   };
   return (
@@ -59,29 +79,6 @@ const LoginForm = () => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Your Password</FormLabel>
-              <FormControl>
-                <Input
-                  type="password"
-                  placeholder="Enter your password"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <p className="medium-16 mt-5 md:mt-5">
-          Forgot password{' '}
-          <Link href="../password/forgot" className="text-lightred-50">
-            Reset here
-          </Link>
-        </p>
         <Button
           type="submit"
           title="Submit Now"
@@ -93,4 +90,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ForgotPasswordForm;

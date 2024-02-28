@@ -18,7 +18,7 @@ import { otpSchema } from '@/lib/models/auth/schema';
 import { useMutatePassResetConfirmOtp } from '@/lib/models/auth/hooks';
 import { errorFormat } from '@/lib/utils';
 import { saveLocalStorage } from '@/lib/core/localStorageUtil';
-import { HIVE_ACCOUNT_EMAIL } from '@/lib/core/constant';
+import { HIVE_RESET_TOKEN } from '@/lib/core/constant';
 const ConfirmPassOtpForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
@@ -29,7 +29,7 @@ const ConfirmPassOtpForm = () => {
   const { mutate: mutatePassResetConfirmOtp } = useMutatePassResetConfirmOtp();
 
   const onSubmit = (values: z.infer<typeof otpSchema>) => {
-    const payload = values ; // it is the value sending
+    const payload = values; // it is the value sending
     setIsLoading(true);
     mutatePassResetConfirmOtp(values, {
       onSuccess: (resp) => {
@@ -39,7 +39,7 @@ const ConfirmPassOtpForm = () => {
           title: 'Success',
           description: 'OTP verified successfully',
         });
-        saveLocalStorage(HIVE_ACCOUNT_EMAIL, resp.token);
+        saveLocalStorage(HIVE_RESET_TOKEN, resp.token);
         console.log(resp.token);
         form.reset();
         router.push('/password/reset');
