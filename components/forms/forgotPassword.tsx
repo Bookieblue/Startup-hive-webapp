@@ -26,7 +26,7 @@ const FormSchema = z.object({
     .email('Incorrect email address'),
 });
 
-const ResetPasswordForm = () => {
+const ForgotPasswordForm = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -46,7 +46,7 @@ const ResetPasswordForm = () => {
       onSuccess: () => {
         setIsLoading(false);
         toast({
-          title: 'OTP Reset Sent Succesfully',
+          title: 'OTP Reset Sent Successfully',
           description: 'OTP Sent successfully',
         });
         saveLocalStorage(HIVE_ACCOUNT_EMAIL, payload.email);
@@ -90,4 +90,4 @@ const ResetPasswordForm = () => {
   );
 };
 
-export default ResetPasswordForm;
+export default ForgotPasswordForm;

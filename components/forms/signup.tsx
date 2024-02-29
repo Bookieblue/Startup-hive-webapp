@@ -132,6 +132,11 @@ const SignUpForm = () => {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel htmlFor={'country'}>Country</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  // value={field.value}
+                  {...field}
+                >
                   <FormControl>
                     <SelectTrigger id="country" className="w-full">
                       <SelectValue placeholder="Select your country" />
