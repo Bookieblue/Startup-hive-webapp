@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import SetPasswordForm from '@/components/forms/setPassword';
-import Logo from '@/components/ui/logo';
+import Link from 'next/link';
+import ForgotPasswordForm from '@/components/forms/forgotPassword';
 
 const SetPassword = () => {
   return (

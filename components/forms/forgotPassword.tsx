@@ -1,6 +1,4 @@
 import React from 'react';
-import { Form } from '../ui/form';
-=======
 import {
   Form,
   FormControl,
@@ -16,9 +14,8 @@ import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { Input } from '../ui/input';
 import Button from '../ui/button';
-import { toast } from '@/components/ui/use-toast';
-import { TextInput } from '../ui/FormFields';
 import { errorFormat } from '@/lib/utils';
 import { useMutatePasswordReset } from '@/lib/models/auth/hooks';
 
@@ -29,7 +26,7 @@ const FormSchema = z.object({
     .email('Incorrect email address'),
 });
 
-const ResetPasswordForm = () => {
+const ForgotPasswordForm = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -39,7 +36,6 @@ const ResetPasswordForm = () => {
 
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
-
   const { mutate: onPassReset } = useMutatePasswordReset();
 
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
@@ -50,7 +46,7 @@ const ResetPasswordForm = () => {
       onSuccess: () => {
         setIsLoading(false);
         toast({
-          title: 'OTP Reset Sent Succesfully',
+          title: 'OTP Reset Sent Successfully',
           description: 'OTP Sent successfully',
         });
         saveLocalStorage(HIVE_ACCOUNT_EMAIL, payload.email);
@@ -70,11 +66,18 @@ const ResetPasswordForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-4">
-        <TextInput
+        <FormField
           control={form.control}
           name="email"
-          placeholder="eg. yourname@gmail.com"
-          label="Your Email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Your Email</FormLabel>
+              <FormControl>
+                <Input placeholder="eg. yourname@gmail.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
         <Button
           type="submit"
@@ -87,4 +90,4 @@ const ResetPasswordForm = () => {
   );
 };
 
-export default ResetPasswordForm;
+export default ForgotPasswordForm;
