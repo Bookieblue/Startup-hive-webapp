@@ -1,4 +1,5 @@
-"use client"
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -52,7 +53,12 @@ const Navbar = () => {
           </Link>
         </ul>
         <div className="lg:flexCenter hidden">
-          <Button type="button" title="Submit Startup" variant="btn_black" isLoading={isLoading}/>
+          <Button
+            type="button"
+            title="Submit Startup"
+            variant="btn_black"
+            isLoading={isLoading}
+          />
         </div>
         <Image
           src="/hamburger.svg"

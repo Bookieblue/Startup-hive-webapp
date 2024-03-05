@@ -245,7 +245,6 @@ h6 {
 
 .react-tagsinput--focused {
   @apply border-[#D4CFCF]
-}
 
 .react-tagsinput-tag {
   @apply bg-[#333333] rounded-lg border border-[#33333] text-[#FDF8E6] 

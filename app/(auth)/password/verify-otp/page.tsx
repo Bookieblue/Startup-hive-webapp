@@ -11,7 +11,7 @@ const ConfirmOtp = () => {
       <div className="african-print" />
       <Logo />
       <div className="lg:w-[50%]">
-    <div className="pt-10">
+     <div className="pt-10">
       <h2 className="text-gray-20 regular-24 lg:regular-34 pb-3 md:pb-5">
         Confirm OTP
       </h2>
