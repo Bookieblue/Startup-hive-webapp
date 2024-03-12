@@ -1,6 +1,7 @@
 const ERROR_STATUS_CODE: any = [400, 406];
 const FORBIDDEN_ERROR_CODE: any = [401, 403];
 const HIVE_ACCOUNT_EMAIL: string = 'hiveAccountEmail';
+const HIVE_ACCESS_TOKEN: string = 'hiveAccessToken';
 const HIVE_ACCOUNT_EMAIL: string = 'hive-account-email';
 const HIVE_RESET_TOKEN: string = 'hive-reset-token';
 

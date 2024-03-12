@@ -36,7 +36,6 @@ const Login = () => {
       </div>
       </div>
     </section>
-=======
     <div className="pt-10">
       <h2 className="text-gray-20 regular-24 lg:regular-34 pb-3 md:pb-5">
         Login
