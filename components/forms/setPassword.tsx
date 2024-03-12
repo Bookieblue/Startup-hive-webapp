@@ -46,6 +46,7 @@ const SetPasswordForm = () => {
   });
 
   const [isLoading, setIsLoading] = React.useState(false);
+
   const { mutate: mutateSetNewPassword } = useMutateSetNewPassword();
 
 

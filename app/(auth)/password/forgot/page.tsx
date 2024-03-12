@@ -26,4 +26,4 @@ const SetPassword = () => {
   );
 };
 
-export default ForgetPassword;
+export default SetPassword;
