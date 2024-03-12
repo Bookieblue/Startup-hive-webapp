@@ -1,15 +1,19 @@
 'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from './ui/button';
 
+
 const Navbar = () => {
+
   const [isLoading, setIsLoading] = React.useState(false);
+
   return (
     <nav
       className="flexBetween max-container
-   padding-container w-full z-30 py-8 bg-cream-50 fixed 2xl:relative "
+   padding-container w-full z-30 py-6 bg-cream-50 fixed 2xl:relative "
     >
       <Link href="/">
         <Image
@@ -44,7 +48,7 @@ const Navbar = () => {
               height={20}
             />
           </div>
-          <Link href="./login">
+          <Link href="/login">
             <p className="text-gray-30 regular-16">Login</p>
           </Link>
         </ul>

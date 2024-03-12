@@ -1,4 +1,6 @@
 import React from 'react';
+
+import { Form } from '../ui/form';
 import {
   Form,
   FormControl,
@@ -14,8 +16,9 @@ import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { Input } from '../ui/input';
 import Button from '../ui/button';
+import { toast } from '@/components/ui/use-toast';
+import { TextInput } from '../ui/FormFields';
 import { errorFormat } from '@/lib/utils';
 import { useMutatePasswordReset } from '@/lib/models/auth/hooks';
 
@@ -36,6 +39,7 @@ const ResetPasswordForm = () => {
 
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
+
   const { mutate: onPassReset } = useMutatePasswordReset();
 
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
@@ -66,18 +70,11 @@ const ResetPasswordForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-4">
-        <FormField
+        <TextInput
           control={form.control}
           name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Your Email</FormLabel>
-              <FormControl>
-                <Input placeholder="eg. yourname@gmail.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          placeholder="eg. yourname@gmail.com"
+          label="Your Email"
         />
         <Button
           type="submit"
