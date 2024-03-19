@@ -61,13 +61,12 @@ export const useMutateEmailConfirmation = (options?: object) => {
   });
 };
 
-
-// 
+//
 //   PASSWORD RESET ENDPOINT STARTING
-// 
+//
 
 export const useMutatePasswordReset = (options?: object) => {
-  const passwordReset = (data: any): Promise<any> =>
+  const passwordReset = (data: JSON): Promise<any> =>
     backendFetch({
       endpoint: '/identity/password/forgot/',
       method: 'POST',
@@ -78,10 +77,10 @@ export const useMutatePasswordReset = (options?: object) => {
     mutationFn: passwordReset,
     ...options,
   });
-}; 
+};
 
 export const useMutatePassResetConfirmOtp = (options?: object) => {
-  const otpConfirm = (data: any): Promise<any> =>
+  const otpConfirm = (data: JSON): Promise<any> =>
     backendFetch({
       endpoint: '/identity/password/verify/otp/',
       method: 'POST',
@@ -92,7 +91,7 @@ export const useMutatePassResetConfirmOtp = (options?: object) => {
     mutationFn: otpConfirm,
     ...options,
   });
-}; 
+};
 
 export const useMutateSetNewPassword = (options?: object) => {
   const newPasswords = (data: any): Promise<any> =>
@@ -106,8 +105,8 @@ export const useMutateSetNewPassword = (options?: object) => {
     mutationFn: newPasswords,
     ...options,
   });
-}; 
+};
 
-// 
+//
 //   PASSWORD RESET ENDPOINT FINISHING
-// 
+//

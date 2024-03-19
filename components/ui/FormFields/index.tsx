@@ -5,4 +5,4 @@ import SelectInput from '@/components/ui/FormFields/SelectInput';
 import TagInput from '@/components/ui/FormFields/TagInput';
 import ImageInput from './ImageInput';
 
-export { TextInput, SelectInput, TagInput, ImageInput};
+export { TextInput, SelectInput, TagInput, ImageInput };

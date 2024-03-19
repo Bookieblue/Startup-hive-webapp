@@ -17,7 +17,6 @@ import { errorFormat } from '@/lib/utils';
 import { HIVE_RESET_TOKEN } from '@/lib/core/constant';
 import _ from 'lodash';
 
-
 const FormSchema = z
   .object({
     password: z
@@ -49,7 +48,6 @@ const SetPasswordForm = () => {
 
   const { mutate: mutateSetNewPassword } = useMutateSetNewPassword();
 
-
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
     const cacheToken = getLocalStorage(HIVE_RESET_TOKEN);
     var b = { token: cacheToken }; //new object to be added as payload
@@ -58,7 +56,6 @@ const SetPasswordForm = () => {
     setIsLoading(true);
     mutateSetNewPassword(values, {
       onSuccess: (resp) => {
-        // console.log(resp);
         setIsLoading(false);
         toast({
           title: 'Success',

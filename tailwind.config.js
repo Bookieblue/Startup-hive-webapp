@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-import { withUt } from "uploadthing/tw";
+import { withUt } from 'uploadthing/tw';
 export default withUt({
   darkMode: ['class'],
   content: [
@@ -34,6 +34,7 @@ export default withUt({
           30: '#545151',
           40: '#D4CFCF',
           50: '#1A1A1A',
+          60: '#545151',
         },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
