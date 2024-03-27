@@ -1,9 +1,17 @@
 'use client';
 
+<<<<<<< HEAD
 import Link from 'next/link';
 import React, { FormEvent, useState } from 'react';
 import ResetPasswordForm from '@/components/forms/resetPassword';
 import Logo from '@/components/ui/logo';
+=======
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { FormEvent, useState } from 'react';
+import ConfirmPassOtpForm from '@/components/forms/confirmPassOtpForm';
+import SetPasswordForm from '@/components/forms/setPassword';
+>>>>>>> 98ad1d2 (new_start_design correction staging)
 
 const ResetPassword = () => {
   return (
@@ -16,7 +24,10 @@ const ResetPassword = () => {
           <p className="text-red-400 bg-yellow-50 w-full py-3 pl-5 rounded-md mt-5 hidden">
             Error! Seems there is an error in the detail you submitted.
           </p>
+<<<<<<< HEAD
           {/* <ResetPasswordForm /> */}
+=======
+>>>>>>> 98ad1d2 (new_start_design correction staging)
           <SetPasswordForm />
           <p className="medium-16 mt-10 mb-28 lg:mb-48">
             Don’t have an account?{' '}

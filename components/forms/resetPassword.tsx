@@ -83,6 +83,15 @@ const ResetPasswordForm = () => {
           variant="btn_lightred"
           isLoading={isLoading}
         />
+<<<<<<< HEAD
+=======
+        <Button
+          type="submit"
+          title="Submit Now"
+          variant="btn_lightred"
+          isLoading={isLoading}
+        />
+>>>>>>> 98ad1d2 (new_start_design correction staging)
       </form>
     </Form>
   );
