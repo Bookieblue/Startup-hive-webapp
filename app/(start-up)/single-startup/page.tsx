@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/ui/button';
 import IsSupport from './isSupport/page';
-import { ISSUPPORT } from '@/app/constants';
+import { ISSUPPORT, TRENDING_STARTUPS } from '@/app/constants';
 import SocialIcons from './social-icons/page';
 import UserReaction from './user-reaction/page';
 import EachOverviewStack from './overview/page';
@@ -13,6 +13,8 @@ import Reviews from './review/page';
 import IsStarred from './isStarred/page';
 import IsSupportCard from './isSupportCard/page';
 import RelatedCompany from './related-company/page';
+import { TrendingStartupItem } from '@/components/trending-startup/page';
+import Footer from '@/components/footer';
 
 const SingleStartup = () => {
   return (
@@ -22,7 +24,7 @@ const SingleStartup = () => {
       </div>
 
       <div className="container-fluid">
-        <section className="light-section max-container mt-28 md:mt-40 md:mx-28">
+        <section className="light-section padding-container max-container mt-28 md:mt-40">
           <div className="flexStart flex-col-reverse md:gap-11 md:flex-row ">
             <Image
               src="/assets/pastack_logo.svg"
@@ -37,7 +39,7 @@ const SingleStartup = () => {
               alt="banner"
               width={253}
               height={29}
-              className="w-[100%] lg:w-[87%]"
+              className="w-[100%] lg:w-[87%] overflow-hidden"
             />
           </div>
 
@@ -115,8 +117,8 @@ const SingleStartup = () => {
           </div>
         </section>
 
-        <section className="dark-section max-container bg-gray-20 mt-5 md:mt-10">
-          <div className="divider flex flex-col justify-between pt-11 pb-14 mx-4 md:mx-28 text-white md:flex-row ">
+        <section className="dark-section max-container padding-container bg-gray-20 mt-5 md:mt-10">
+          <div className="divider flex flex-col justify-between pt-11 pb-14 text-white md:flex-row ">
             <div className="right-section flex-col ">
               <div className="top_card flex flex-row py-5 border-t border-b border-gray-30 gap-5">
                 <Image
@@ -219,7 +221,7 @@ const SingleStartup = () => {
               </div>
               {/* review section end */}
 
-              <div className="comment mt-4 px-4 py-4 bg-cream-50  w-fit md:w-[35rem] text-black">
+              <div className="comment mt-4 px-4 py-4 bg-cream-50 mr-10 w-full md:w-[35rem] text-black">
                 <div className="">
                   <div className="flex flex-row">
                     <Image
@@ -248,7 +250,7 @@ const SingleStartup = () => {
                   </div>
 
                   <textarea
-                    className="col resize-y rounded-md bg-cream-50 border-2 border-gray-40 mt-4 p-4 w-[17rem] md:w-[32rem] h-32 regular-16 text-gray-20 font-[lato]"
+                    className="col resize-y rounded-md bg-cream-50 border-2 border-gray-40 mt-4 p-4 h-32 w-full regular-16 text-gray-20 font-[lato]"
                     name=""
                     id=""
                     placeholder="write review"
@@ -275,7 +277,7 @@ const SingleStartup = () => {
               <RelatedCompany />
             </div>
 
-            <div className="left-section flex flex-col">
+            <div className="left-section  w-[30%]">
               <div>
                 <Image
                   src="/assets/ads_banner.svg"
@@ -285,10 +287,23 @@ const SingleStartup = () => {
                   className="w-[20%] md:w-[100%]"
                 />
               </div>
+              <div className="mt-14">
+             {TRENDING_STARTUPS.map((TrendingStartup) => (
+            <TrendingStartupItem
+              key={TrendingStartup.name}
+              name={TrendingStartup.name}
+              icon={TrendingStartup.icon}
+              field={TrendingStartup.field}
+              location={TrendingStartup.location}
+              description={TrendingStartup.description}
+            />
+          ))}
+        </div>
             </div>
           </div>
         </section>
       </div>
+      <Footer/>
     </>
   );
 };
