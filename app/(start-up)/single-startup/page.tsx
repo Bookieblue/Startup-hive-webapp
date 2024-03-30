@@ -89,16 +89,15 @@ const SingleStartup = () => {
                   <Link href="/">
                     <div className="px-7 py-2 border-2 border-gray-20 md:px-7 rounded-sm flex flex-row">
                       <Image
-                        src="/assets/visit_vector.svg"
+                        src="/assets/visit_arrow_icon.svg"
                         alt="visit_vector_logo"
                         width={25}
                         height={29}
                         className="w-[26%] md:w-[26%] "
-                      />{' '}
+                      />
                       &nbsp;&nbsp;
                       <button className="text-gray-20 font-regular-16 font-[inter]">
-                        {' '}
-                        Visit{' '}
+                        Visit
                       </button>
                     </div>
                   </Link>
