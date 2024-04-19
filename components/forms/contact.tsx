@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from '../ui/form';
+import { Form } from '@/components/ui/form';
 import * as _ from 'lodash';
 import { useRouter } from 'next/navigation';
 import { toast } from '@/components/ui/use-toast';

@@ -11,7 +11,6 @@ import { LoginSchema } from '@/lib/models/auth/schema';
 import { useMutateLogin } from '@/lib/models/auth/hooks';
 import { toast } from '@/components/ui/use-toast';
 
-
 const LoginForm = () => {
   const router = useRouter();
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -27,12 +26,12 @@ const LoginForm = () => {
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setIsLoading(true);
-        setIsLoading(false);
-          toast({
-            title: 'ERROR',
-            description: 'message',
-          });
-        }
+    setIsLoading(false);
+    toast({
+      title: 'ERROR',
+      description: 'message',
+    });
+  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-4">
@@ -65,6 +64,6 @@ const LoginForm = () => {
       </form>
     </Form>
   );
-  };
+};
 
-export default LoginForm
+export default LoginForm;
