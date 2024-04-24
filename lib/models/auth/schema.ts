@@ -10,7 +10,7 @@ export const signupFormSchema = z
       .email('Incorrect email address'),
     password: z.string().min(8, 'Password is required'),
     confirm_password: z.string().min(8, 'Password confirmation is required'),
-    country: z.string(),
+    country: z.string().min(1, 'Country must be selected'),
   })
   .refine((data) => data.password === data.confirm_password, {
     path: ['confirm_password'],
@@ -21,7 +21,13 @@ export const otpSchema = z.object({
   otp: z.string().min(1, 'OTP is required').max(6),
 });
 
-export const LoginSchema = z.object({});
+export const LoginSchema = z.object({
+  email: z
+  .string()
+  .min(1, 'Email is required')
+  .email('Incorrect email address'),
+  password: z.string().min(8, 'Password is required'),
+});
 
 //submit startup schema
 export const StartupSchema = z
