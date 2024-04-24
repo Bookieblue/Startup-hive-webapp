@@ -7,8 +7,8 @@ const SocialIcons = () => {
   return (
     <>
       <div className="social_icons flex flex-row justify-center gap-2 mt-4 md:mt-0 md:justify-start ">
-        {SOCIALICONS.map((icon) => (
-          <Link href="/">
+        {SOCIALICONS.map((icon, index) => (
+          <Link href="/" key={index}>
             <Image src={icon.src} alt={icon.alt} width={25} height={29} />
           </Link>
         ))}

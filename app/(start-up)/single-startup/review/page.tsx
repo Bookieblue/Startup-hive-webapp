@@ -7,8 +7,8 @@ REVIEW;
 const Reviews = () => {
   return (
     <>
-      {REVIEW.map((review) => (
-        <div className="each_review mt-8 pb-4 border-b border-[#545151]">
+      {REVIEW.map((review, index) => (
+        <div className="each_review mt-8 pb-4 border-b border-[#545151]" key={index}>
           <div className="flex flex-row">
             <Image src={review.src} alt={review.alt} width={45} height={29} />
             <div className="ml-2">

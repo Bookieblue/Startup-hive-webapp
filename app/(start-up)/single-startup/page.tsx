@@ -17,10 +17,8 @@ import ServiceRender from './service/page';
 import Reviews from './review/page';
 import IsStarred from './isStarred/page';
 import IsSupportCard from './isSupportCard/page';
-import RelatedCompany from './related-company/page';
 import { TrendingStartupItem } from '@/components/trending-startup/page';
 import Footer from '@/components/footer';
-import { StartupItem } from '@/components/startup/page';
 import { ExploreStartupItem } from '@/components/explore-startup/page';
 
 const SingleStartup = () => {
