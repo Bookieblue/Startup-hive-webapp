@@ -18,7 +18,7 @@ const Login = () => {
           </h2>
           <p className="regular-18 lg:regular-20 ">
             Note! If you own a Startup, publish it from{' '}
-            <Link href="/" className="underline text-lightred-50">
+            <Link href="/submit-startup" className="underline text-lightred-50">
               here
             </Link>
           </p>
