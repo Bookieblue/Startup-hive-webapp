@@ -5,8 +5,8 @@ import React from 'react';
 const EachOverviewStack = () => {
   return (
     <>
-      {OVERVIEWSTACK.map((overview) => (
-        <div className="each_stack flex flex-row items-center gap-2 mt-4">
+      {OVERVIEWSTACK.map((overview, index) => (
+        <div className="each_stack flex flex-row items-center gap-2 mt-4" key={index}>
           <Image src={overview.src} alt={overview.alt} width={19} height={29} />
           <p className="w-[9rem] regular-16 font-[lato] text-gray-40">
             {overview.tag}
