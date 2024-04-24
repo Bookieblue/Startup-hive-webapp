@@ -1,4 +1,29 @@
 
+    //NAVBAR LINK SECTION
+    export const Navbar_LINKS = [
+
+      {
+        title: 'Suggest Startup',
+        url: '/suggest-startup'
+      },
+      {
+        title: 'Feedback',
+        url: '/contact-us'
+      },
+      {
+        title: 'Contact us',
+        url: '/contact-us'
+      },
+
+      {
+        title: 'Terms & Conditions',
+        url: '/terms-and-conditions'
+      },
+
+
+  ]
+
+
 // COUNTRY DROPDOWN MENU
 export const AFRICAN_COUNTRIES = [
   {

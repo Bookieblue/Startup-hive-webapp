@@ -24,7 +24,7 @@ interface OptionType {
 interface SelectInputProps {
   control ?: Control<any>;
   name: string;
-  label: string;
+  label?: string;
   placeholder: string;
   error?: string;
   options: OptionType[];

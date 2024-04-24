@@ -93,11 +93,16 @@ h6 {
 
 @layer utilities {
   .btn_black {
-    @apply border-black bg-transparent px-8 py-3 text-black;
+    @apply border-cream-50 text-cream-50 px-3 py-1 lg:border-black bg-transparent lg:px-6 lg:py-3 lg:text-black;
   }
 
   .btn_lightred {
-    @apply border-yellow-50 border-r-4 border-b-4 bg-lightred-50 px-8 py-3 text-cream-50;
+    @apply border-yellow-50 border-r-4 border-b-4 bg-lightred-50 px-6 py-3 text-cream-50 cursor-pointer;
+  }
+
+  
+  .btn_lightred2 {
+    @apply border-[#E7A21C] border-r-2 border-b-2 bg-lightred-50 px-3 py-1 text-cream-50 text-sm ;
   }
 
   .max-container {
@@ -105,7 +110,7 @@ h6 {
   }
 
   .padding-container {
-    @apply px-6 lg:px-20;
+    @apply px-6 max-lg:px-9 xl:px-20;
   }
 
   .flexCenter {

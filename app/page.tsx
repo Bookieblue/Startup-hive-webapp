@@ -24,7 +24,7 @@ export default function Home() {
       <Navbar />
 
       {/* hero section */}
-      <section className="max-container padding-container flexCenter flex-col gap-6 mt-20 lg:mt-28 lg:justify-between relative">
+      <section className="max-container padding-container flexCenter flex-col gap-6 mt-24 lg:mt-28 lg:justify-between relative">
         <div className="flexStart xl:flexCenter gap-2 lg:mb-20 m-x-auto overflow-x-auto w-full whitespace-nowrap scrollbar-thin scrollbar-thumb-grey-30 scrollbar-track-gray-100">
           {STARTUPS_COUNTRIES.map((country, index) => (
             <li
@@ -55,6 +55,7 @@ export default function Home() {
           height={100}
           className="absolute right-0 bottom-0"
         />
+        <div>
         <h1 className="lg:medium-54 medium-26 text-center">
           Discover unicorns & emerging Startups in Africa
         </h1>
@@ -62,6 +63,7 @@ export default function Home() {
           Let’s share & discuss our amazing startups in Africa making a
           difference.
         </p>
+        </div>
         <Button
           type="button"
           title="Suggest Startup"
