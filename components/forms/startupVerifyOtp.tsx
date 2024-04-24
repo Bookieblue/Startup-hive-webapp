@@ -9,7 +9,6 @@ import Button from '../ui/button';
 import { TextInput } from '@/components/ui/FormFields';
 import { otpSchema } from '@/lib/models/auth/schema';
 
-
 const StartupVerifyOtpForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
@@ -20,19 +19,16 @@ const StartupVerifyOtpForm = () => {
     },
   });
 
-
-
   const onSubmit = (values: z.infer<typeof otpSchema>) => {
     setIsLoading(true);
-        setIsLoading(false);
-        toast({
-          title: 'SUCCESS',
-          description: 'Email verified successfully',
-        });
-        form.reset();
-        router.push('/startup-onboarding/onboard');
-      }
-
+    setIsLoading(false);
+    toast({
+      title: 'SUCCESS',
+      description: 'Email verified successfully',
+    });
+    form.reset();
+    router.push('/startup-onboarding/onboard');
+  };
 
   return (
     <Form {...form}>
@@ -54,4 +50,4 @@ const StartupVerifyOtpForm = () => {
   );
 };
 
-export default StartupVerifyOtpForm ;
+export default StartupVerifyOtpForm;

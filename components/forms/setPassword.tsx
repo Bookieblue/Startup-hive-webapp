@@ -6,6 +6,16 @@ import * as z from 'zod';
 import Button from '../ui/button';
 import { toast } from '@/components/ui/use-toast';
 import { TextInput } from '../ui/FormFields';
+import { useRouter } from 'next/navigation';
+import { useMutateSetNewPassword } from '@/lib/models/auth/hooks';
+import { toast } from '../ui/use-toast';
+import {
+  getLocalStorage,
+  removeLocalStorage,
+} from '@/lib/core/localStorageUtil';
+import { errorFormat } from '@/lib/utils';
+import { HIVE_RESET_TOKEN } from '@/lib/core/constant';
+import _ from 'lodash';
 
 const FormSchema = z
   .object({
@@ -24,6 +34,8 @@ const FormSchema = z
   });
 
 const SetPasswordForm = () => {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = React.useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -34,11 +46,37 @@ const SetPasswordForm = () => {
 
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const { mutate: mutateSetNewPassword } = useMutateSetNewPassword();
+
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
+<<<<<<< HEAD
+    const cacheToken = getLocalStorage(HIVE_RESET_TOKEN);
+=======
+    const cacheToken = getLocalStorage(HIVE_ACCOUNT_EMAIL);
+>>>>>>> 98ad1d2 (new_start_design correction staging)
+    var b = { token: cacheToken }; //new object to be added as payload
+    const payload = _.extend(values, b);
+
     setIsLoading(true);
-    toast({
-      title: 'Submitted succesfully',
-      description: 'Password reset successfully',
+    mutateSetNewPassword(values, {
+      onSuccess: (resp) => {
+        setIsLoading(false);
+        toast({
+          title: 'Success',
+          description: 'Your New Password Created Successfully',
+        });
+        form.reset();
+        removeLocalStorage(HIVE_RESET_TOKEN);
+        router.push('/login');
+      },
+      onError: (error: any) => {
+        setIsLoading(false);
+        const message = errorFormat(error);
+        toast({
+          title: 'Error',
+          description: message,
+        });
+      },
     });
   };
   return (

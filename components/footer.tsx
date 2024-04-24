@@ -1,5 +1,8 @@
 import Link from 'next/link';
+import Link from 'next/link';
 import React from 'react';
+import Image from 'next/image';
+import { FOOTER_INFO_LINKS, FOOTER_LINKS, SOCIAL_LINKS } from '@/app/constants';
 import Image from 'next/image';
 import { FOOTER_INFO_LINKS, FOOTER_LINKS, SOCIAL_LINKS } from '@/app/constants';
 
@@ -68,6 +71,9 @@ const Footer = () => {
     </footer>
   );
 };
+
+export default Footer;
+
 
 export default Footer;
 

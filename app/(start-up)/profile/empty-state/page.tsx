@@ -65,17 +65,17 @@ const page = () => {
         <h3 className="text-white medium-20 mt-10 ">
           Discover trending Startups
         </h3>
-        <div className='mt-14'>
-        {TRENDING_STARTUPS.map((TrendingStartup) => (
-          <TrendingStartupItem
-            key={TrendingStartup.name}
-            name={TrendingStartup.name}
-            icon={TrendingStartup.icon}
-            field={TrendingStartup.field}
-            location={TrendingStartup.location}
-            description={TrendingStartup.description}
-          />
-        ))}
+        <div className="mt-14">
+          {TRENDING_STARTUPS.map((TrendingStartup) => (
+            <TrendingStartupItem
+              key={TrendingStartup.name}
+              name={TrendingStartup.name}
+              icon={TrendingStartup.icon}
+              field={TrendingStartup.field}
+              location={TrendingStartup.location}
+              description={TrendingStartup.description}
+            />
+          ))}
         </div>
       </div>
     </section>

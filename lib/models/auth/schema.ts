@@ -63,7 +63,10 @@ export const OnboardSchema = z
     company_field: z.string().min(1, 'Please select a field to display'),
     year: z.string().min(4, 'Valid Year is required').max(4, 'Invaild year'),
     tags: z.string().min(1, 'Tag is required'),
-    image: z.string().min(1,'Image is required').url({ message: 'Invalid image URL' }),
+    image: z
+      .string()
+      .min(1, 'Image is required')
+      .url({ message: 'Invalid image URL' }),
   })
   .refine(
     (data) => {

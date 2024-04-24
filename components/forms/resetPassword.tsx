@@ -1,11 +1,27 @@
 import React from 'react';
+
 import { Form } from '../ui/form';
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '../ui/form';
+import { toast } from '@/components/ui/use-toast';
+import { HIVE_ACCOUNT_EMAIL } from '@/lib/core/constant';
+import { saveLocalStorage } from '@/lib/core/localStorageUtil';
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import Button from '../ui/button';
 import { toast } from '@/components/ui/use-toast';
 import { TextInput } from '../ui/FormFields';
+import { errorFormat } from '@/lib/utils';
+import { useMutatePasswordReset } from '@/lib/models/auth/hooks';
 
 const FormSchema = z.object({
   email: z
@@ -22,13 +38,34 @@ const ResetPasswordForm = () => {
     },
   });
 
+  const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const { mutate: onPassReset } = useMutatePasswordReset();
+
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
+    const payload = values;
     setIsLoading(true);
-    toast({
-      title: 'Submitted succesfully',
-      description: 'Reset password details sent successfully',
+
+    onPassReset(payload, {
+      onSuccess: () => {
+        setIsLoading(false);
+        toast({
+          title: 'OTP Reset Sent Succesfully',
+          description: 'OTP Sent successfully',
+        });
+        saveLocalStorage(HIVE_ACCOUNT_EMAIL, payload.email);
+        form.reset();
+        router.push('/password/confirm');
+      },
+      onError: (error: any) => {
+        setIsLoading(false);
+        const message = errorFormat(error);
+        toast({
+          title: 'Error',
+          description: message,
+        });
+      },
     });
   };
   return (
@@ -46,6 +83,15 @@ const ResetPasswordForm = () => {
           variant="btn_lightred"
           isLoading={isLoading}
         />
+<<<<<<< HEAD
+=======
+        <Button
+          type="submit"
+          title="Submit Now"
+          variant="btn_lightred"
+          isLoading={isLoading}
+        />
+>>>>>>> 98ad1d2 (new_start_design correction staging)
       </form>
     </Form>
   );

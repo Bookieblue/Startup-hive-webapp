@@ -33,13 +33,13 @@ const AboutStartUpForm = () => {
           label="What do you want the world to know about your startup?"
           className="h-40 px-5 pb-28 mb-5"
         />
-        <div className='pb-10'>
-        <Button
-          type="submit"
-          title="Save & Proceed"
-          variant="btn_lightred"
-          isLoading={isLoading}
-        />
+        <div className="pb-10">
+          <Button
+            type="submit"
+            title="Save & Proceed"
+            variant="btn_lightred"
+            isLoading={isLoading}
+          />
         </div>
       </form>
     </Form>

@@ -62,7 +62,7 @@ const StartUpServicesForm = () => {
             </Link>
           </div>
         </div>
-        <div className='pb-10'>
+        <div className="pb-10">
           <Button
             type="submit"
             title="Save & Proceed"
