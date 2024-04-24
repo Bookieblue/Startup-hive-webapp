@@ -8,7 +8,6 @@ import { toast } from '@/components/ui/use-toast';
 import { TextInput } from '../ui/FormFields';
 import { useRouter } from 'next/navigation';
 import { useMutateSetNewPassword } from '@/lib/models/auth/hooks';
-import { toast } from '../ui/use-toast';
 import {
   getLocalStorage,
   removeLocalStorage,
@@ -44,16 +43,12 @@ const SetPasswordForm = () => {
     },
   });
 
-  const [isLoading, setIsLoading] = React.useState(false);
+  
 
   const { mutate: mutateSetNewPassword } = useMutateSetNewPassword();
 
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
-<<<<<<< HEAD
     const cacheToken = getLocalStorage(HIVE_RESET_TOKEN);
-=======
-    const cacheToken = getLocalStorage(HIVE_ACCOUNT_EMAIL);
->>>>>>> 98ad1d2 (new_start_design correction staging)
     var b = { token: cacheToken }; //new object to be added as payload
     const payload = _.extend(values, b);
 

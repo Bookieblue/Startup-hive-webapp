@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import ForgotPasswordForm from '@/components/forms/forgotPassword';
+import Logo from '@/components/ui/logo';
+import ResetPasswordForm from '@/components/forms/resetPassword';
 
 const SetPassword = () => {
   return (
@@ -18,7 +18,7 @@ const SetPassword = () => {
             <p className="text-red-400 bg-yellow-50 w-full py-3 pl-5 rounded-md mt-5 hidden">
               Error! Seems there is an error in the detail you submitted.
             </p>
-            <SetPasswordForm />
+            <ResetPasswordForm />
           </div>
         </div>
       </div>

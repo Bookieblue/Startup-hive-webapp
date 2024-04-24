@@ -1,15 +1,6 @@
 import React from 'react';
 
 import { Form } from '../ui/form';
-
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '../ui/form';
 import { toast } from '@/components/ui/use-toast';
 import { HIVE_ACCOUNT_EMAIL } from '@/lib/core/constant';
 import { saveLocalStorage } from '@/lib/core/localStorageUtil';
@@ -18,25 +9,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import Button from '../ui/button';
-import { toast } from '@/components/ui/use-toast';
 import { TextInput } from '../ui/FormFields';
-import { errorFormat } from '@/lib/utils';
 import { useMutatePasswordReset } from '@/lib/models/auth/hooks';
 
-const FormSchema = z.object({
-  email: z
-    .string()
-    .min(1, 'Email is required')
-    .email('Incorrect email address'),
-});
+
 
 const ResetPasswordForm = () => {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      email: '',
-    },
-  });
 
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
@@ -45,10 +23,7 @@ const ResetPasswordForm = () => {
 
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
     const payload = values;
-    setIsLoading(true);
-
-    onPassReset(payload, {
-      onSuccess: () => {
+  
         setIsLoading(false);
         toast({
           title: 'OTP Reset Sent Succesfully',
@@ -56,18 +31,23 @@ const ResetPasswordForm = () => {
         });
         saveLocalStorage(HIVE_ACCOUNT_EMAIL, payload.email);
         form.reset();
-        router.push('/password/confirm');
-      },
-      onError: (error: any) => {
-        setIsLoading(false);
-        const message = errorFormat(error);
-        toast({
-          title: 'Error',
-          description: message,
-        });
-      },
-    });
-  };
+    }
+  
+
+  const FormSchema = z.object({
+    email: z
+      .string()
+      .min(1, 'Email is required')
+      .email('Incorrect email address'),
+  });
+
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      email: '',
+    },
+  });
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-4">
@@ -83,15 +63,6 @@ const ResetPasswordForm = () => {
           variant="btn_lightred"
           isLoading={isLoading}
         />
-<<<<<<< HEAD
-=======
-        <Button
-          type="submit"
-          title="Submit Now"
-          variant="btn_lightred"
-          isLoading={isLoading}
-        />
->>>>>>> 98ad1d2 (new_start_design correction staging)
       </form>
     </Form>
   );
