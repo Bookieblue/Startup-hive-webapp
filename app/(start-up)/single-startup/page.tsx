@@ -4,7 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/ui/button';
 import IsSupport from './isSupport/page';
-import { ISSUPPORT, TRENDING_STARTUPS } from '@/app/constants';
+import {
+  EXPLORE_STARTUPS,
+  ISSUPPORT,
+  STARTUPS,
+  TRENDING_STARTUPS,
+} from '@/app/constants';
 import SocialIcons from './social-icons/page';
 import UserReaction from './user-reaction/page';
 import EachOverviewStack from './overview/page';
@@ -15,6 +20,8 @@ import IsSupportCard from './isSupportCard/page';
 import RelatedCompany from './related-company/page';
 import { TrendingStartupItem } from '@/components/trending-startup/page';
 import Footer from '@/components/footer';
+import { StartupItem } from '@/components/startup/page';
+import { ExploreStartupItem } from '@/components/explore-startup/page';
 
 const SingleStartup = () => {
   return (
@@ -63,7 +70,7 @@ const SingleStartup = () => {
 
             <div className="flex flex-col gap-2 mt-7 md:flex-row md:gap-20 justify-between">
               <div className="">
-                <p className="text-center text-gray-20 font-regular-18 font-[lato]">
+                <p className="text-center md:text-start text-gray-20 font-regular-18 font-[lato]">
                   Easy to setup payment gateway for online & offline business
                 </p>
                 <div className="flex flex-col md:flex-row items-center  md:mt-7 gap-2">
@@ -73,7 +80,7 @@ const SingleStartup = () => {
                       alt="location_map_logo"
                       width={25}
                       height={29}
-                      className="w-[13%] md:w-[13%] "
+                      className="w-[13%] md:w-[13%]"
                     />
                     <p className="text-gray-20 font-regular-14 font-[lato]">
                       Lagos, Nigeria
@@ -118,9 +125,9 @@ const SingleStartup = () => {
         </section>
 
         <section className="dark-section max-container padding-container bg-gray-20 mt-5 md:mt-10">
-          <div className="divider flex flex-col justify-between pt-11 pb-14 text-white md:flex-row ">
+          <div className="divider flex flex-col justify-between pt-11 pb-14 text-white lg:flex-row ">
             <div className="right-section flex-col ">
-              <div className="top_card flex flex-row py-5 border-t border-b border-gray-30 gap-5">
+              <div className="top_card flex flex-col md:flex-row py-5 border-t border-b border-gray-30 gap-5">
                 <Image
                   src="/assets/jumia_logo.svg"
                   alt="jumia_logo"
@@ -273,37 +280,52 @@ const SingleStartup = () => {
                   Paystack alternatives or related companies
                 </h1>
               </div>
-
-              <RelatedCompany />
+              <div className="mt-6 lg:mt-14 lg:mb-40">
+                {EXPLORE_STARTUPS.map((Startup) => (
+                  <Link href={Startup.url} key={Startup.name}>
+                    <div className="hover:bg-gray-30 hover:shadow-md hover:px-5 hover:rounded-sm transform hover:scale-105 transition duration-300 ease-in-out">
+                      <ExploreStartupItem
+                        name={Startup.name}
+                        icon={Startup.icon}
+                        field={Startup.field}
+                        location={Startup.location}
+                        description={Startup.description}
+                        supports={Startup.supports}
+                      />
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
 
-            <div className="left-section  w-[30%]">
-              <div>
-                <Image
-                  src="/assets/ads_banner.svg"
-                  alt="yellow_star_setting"
-                  width={250}
-                  height={89}
-                  className="w-[20%] md:w-[100%]"
-                />
-              </div>
+            <div className="bg-gray-20 lg:w-[35%] h-full p-5 mb-10 ">
+              <Image
+                src="/ad-pic.svg"
+                alt="ads"
+                width={400}
+                height={100}
+                className=""
+              />
+              <h3 className="text-white medium-20 mt-10 ">
+              Trending Startups
+              </h3>
               <div className="mt-14">
-             {TRENDING_STARTUPS.map((TrendingStartup) => (
-            <TrendingStartupItem
-              key={TrendingStartup.name}
-              name={TrendingStartup.name}
-              icon={TrendingStartup.icon}
-              field={TrendingStartup.field}
-              location={TrendingStartup.location}
-              description={TrendingStartup.description}
-            />
-          ))}
-        </div>
+                {TRENDING_STARTUPS.map((TrendingStartup) => (
+                  <TrendingStartupItem
+                    key={TrendingStartup.name}
+                    name={TrendingStartup.name}
+                    icon={TrendingStartup.icon}
+                    field={TrendingStartup.field}
+                    location={TrendingStartup.location}
+                    description={TrendingStartup.description}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </section>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

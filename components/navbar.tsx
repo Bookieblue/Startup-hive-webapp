@@ -3,11 +3,69 @@ import React, { useState, ChangeEvent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from './ui/button';
+import { useRouter } from 'next/navigation';
+import { Navbar_LINKS } from '@/app/constants';
+import { SelectInput } from './ui/FormFields';
+import { AFRICAN_COUNTRIES } from '@/app/constants';
+import { Form } from './ui/form';
+import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
+const Navbar: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
-const Navbar = () => {
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
 
-  const [isLoading, setIsLoading] = React.useState(false);
+  const handleSearchIconClick = () => {
+    setIsSearchExpanded(true);
+  };
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearch = () => {
+    // Implement your search functionality here
+    console.log('Search query:', searchQuery);
+    setIsSearchExpanded(false); // Collapse the search field
+  };
+
+  const handleInputBlur = () => {
+    setIsSearchExpanded(false); // Collapse the search field when input field loses focus
+  };
+
+  const handleButtonClick = () => {
+    handleSearch(); // Trigger search action when button is clicked
+  };
+
+  const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen); // Toggle menu visibility
+  };
+
+  const handleOpenMenu = () => {
+    setIsOpen(!isOpen); // Toggle menu visibility
+  };
+
+  const countries = AFRICAN_COUNTRIES.map((country) => ({
+    label: country.name,
+    value: country.code,
+  }));
+
+  const FormSchema = z.object({
+    country: z.string(),
+  });
+
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      country: '',
+    },
+  });
 
   return (
     <nav className="flexBetween max-container padding-container w-full z-30 py-5 lg:py-6 bg-cream-50 fixed 2xl:relative">
@@ -78,7 +136,13 @@ const Navbar = () => {
           </Link>
         </ul>
         <div className="lg:flexCenter hidden">
-          <Button type="button" title="Submit Startup" variant="btn_black" isLoading={isLoading}/>
+          <Button
+            type="button"
+            title="Submit Startup"
+            variant="btn_black"
+            isLoading={isLoading}
+            onClick={() => router.push('/submit-startup')}
+          />
         </div>
         <Image
           src={isMenuOpen ? '/close.svg' : '/hamburger.svg'} // Dynamically change the icon based on menu state
