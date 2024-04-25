@@ -444,7 +444,7 @@ export const COMPANY_FIELD = [
           location: 'Lagos, Nigeria',
           description:
             'Automated security compliance for your business in weeks',
-          supports: 9,
+          supports: 900,
           url: '/single-startup'
         },
         {
@@ -454,7 +454,7 @@ export const COMPANY_FIELD = [
           location: 'Lagos, Nigeria',
           description:
             'Automated security compliance for your business in weeks',
-          supports: 2,
+          supports: 200,
           url: '/single-startup'
         },
     
